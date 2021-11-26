@@ -3,6 +3,7 @@ package com.leoita.fitApp;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -74,4 +75,19 @@ class BMICalculatorTest {
         /*assertAll will execute all the tests even if one of them fails
         without it if we have multiple assertions and the first fails we'll not have any info about other tests*/
     }
+
+    @Test
+    void shouldReturnNullWhenCoderListEmpty() {
+
+        //given
+        List<Coder> coders = new ArrayList<>();
+
+        //when
+        Coder coderWorstBMI = BMICalculator.findCoderWithWorstBMI(coders);
+
+        //then
+
+        assertNull(coderWorstBMI);
+    }
+
 }
