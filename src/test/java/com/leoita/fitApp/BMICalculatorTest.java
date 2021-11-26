@@ -1,9 +1,9 @@
 package com.leoita.fitApp;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class BMICalculatorTest {
 
@@ -33,5 +33,19 @@ class BMICalculatorTest {
 
         //then
         assertFalse(isDietRecommended);
+    }
+
+    @Test
+    void shouldThrowArithmeticExceptionWhenHeightZero() {
+
+        //given
+        double weight = 50.0;
+        double height = 0.00;
+
+        //when
+        Executable executable = ()-> BMICalculator.isDietRecommended(weight, height);
+
+        //then
+        assertThrows(ArithmeticException.class,executable);
     }
 }
