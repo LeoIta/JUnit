@@ -3,6 +3,9 @@ package com.leoita.fitApp;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BMICalculatorTest {
@@ -43,9 +46,32 @@ class BMICalculatorTest {
         double height = 0.00;
 
         //when
-        Executable executable = ()-> BMICalculator.isDietRecommended(weight, height);
+        Executable executable = () -> BMICalculator.isDietRecommended(weight, height);
 
         //then
-        assertThrows(ArithmeticException.class,executable);
+        assertThrows(ArithmeticException.class, executable);
+    }
+
+    @Test
+    void shouldReturnCoderWithWorstBMIWhenCoderListNotEmpty() {
+
+        //given
+        List<Coder> coders = Arrays.asList(
+                new Coder(1.80, 60.0),
+                new Coder(1.82, 98.0),
+                new Coder(1.82, 64.7)
+        );
+
+        //when
+        Coder coderWorstBMI = BMICalculator.findCoderWithWorstBMI(coders);
+
+        //then
+
+        assertAll(
+                () -> assertEquals(1.82, coderWorstBMI.getHeight()),
+                () -> assertEquals(98.0, coderWorstBMI.getWeight())
+        );
+        /*assertAll will execute all the tests even if one of them fails
+        without it if we have multiple assertions and the first fails we'll not have any info about other tests*/
     }
 }
