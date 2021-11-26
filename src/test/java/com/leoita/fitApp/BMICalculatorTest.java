@@ -1,6 +1,6 @@
 package com.leoita.fitApp;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.function.Executable;
 
 import java.util.ArrayList;
@@ -10,6 +10,23 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BMICalculatorTest {
+
+    @BeforeAll
+    static void beforeAll() {
+        System.out.println("Starting all the tests ...\n");
+    }
+    @BeforeEach
+    void setup() {
+        System.out.print("unit test is starting ...");
+    }
+    @AfterEach
+    void tearDown() {
+        System.out.println(" unit test was executed\n");
+    }
+    @AfterAll
+    static void afterAll() {
+        System.out.println("All unit tests executed");
+    }
 
     @Test
     void shouldReturnTrueWhenDietRecommended() {
@@ -99,14 +116,14 @@ class BMICalculatorTest {
                 new Coder(1.82, 98.0),
                 new Coder(1.82, 64.7)
         );
-        double[] expected = {18.52, 29.59,19.53};
+        double[] expected = {18.52, 29.59, 19.53};
 
         //when
 
         double[] bmiScores = BMICalculator.getBMIScores(coders);
 
         //then
-        assertArrayEquals(expected,bmiScores);
+        assertArrayEquals(expected, bmiScores);
     }
 
 }
