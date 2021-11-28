@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -188,6 +189,23 @@ class BMICalculatorTest {
 
         //when
         boolean isDietRecommended = BMICalculator.isDietRecommended(weight, height);
+
+        //then
+        assertTrue(isDietRecommended);
+    }
+
+    @RepeatedTest(value = 10)
+    void shouldReturnTrueWhenDietRecommendedMultipleInputFromExternalCSV() {
+
+        //given
+        Random r = new Random();
+        double rangeMin = 1.60;
+        double rangeMax = 1.90;
+        double randomHeight = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
+        double weight = 100.0;
+
+        //when
+        boolean isDietRecommended = BMICalculator.isDietRecommended(weight, randomHeight);
 
         //then
         assertTrue(isDietRecommended);
