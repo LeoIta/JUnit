@@ -219,7 +219,9 @@ class BMICalculatorTest {
     }
 
     @Nested
+    @DisplayName("<<<<<<<this is the custom name for tests group>>>>>>>>>>>")
     class getBMIScoresTests {
+        @DisplayName("####this is the custom name for the test####")
         @Test
         void shouldReturnCorrectBMIScoreArrayWhenCoderListNotEmpty() {
 
@@ -239,6 +241,7 @@ class BMICalculatorTest {
             assertArrayEquals(expected, bmiScores);
         }
     }
+
 
 
 }
