@@ -1,6 +1,7 @@
 package com.leoita.fitApp;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -16,7 +17,7 @@ import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BMICalculatorTest {
-
+    private String environment = "dev";
     @BeforeAll
     static void beforeAll() {
         System.out.println("Starting all the tests ...\n");
@@ -106,6 +107,7 @@ class BMICalculatorTest {
     void shouldReturnCoderWithWorstBMIin100msWhenCoderListHas10000Elements() {
 
         //given
+        Assumptions.assumeTrue(this.environment.equals("prod")); //if assumption is false the test will be skipped
         List<Coder> coders = new ArrayList<>();
         for (int i = 0; i < 10000; i++) {
             coders.add(new Coder(1.0 + i, 10.0 + i));
