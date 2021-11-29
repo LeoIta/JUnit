@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -99,6 +100,22 @@ class BMICalculatorTest {
         );
         /*assertAll will execute all the tests even if one of them fails
         without it if we have multiple assertions and the first fails we'll not have any info about other tests*/
+    }
+
+    @Test()
+    void shouldReturnCoderWithWorstBMIin100msWhenCoderListHas10000Elements() {
+
+        //given
+        List<Coder> coders = new ArrayList<>();
+        for (int i = 0; i < 10000; i++) {
+            coders.add(new Coder(1.0 + i, 10.0 + i));
+        }
+
+        //when
+
+        Executable executable = () -> BMICalculator.findCoderWithWorstBMI(coders);
+        //then
+        assertTimeout(Duration.ofMillis(100),executable);
     }
 
     @Test
